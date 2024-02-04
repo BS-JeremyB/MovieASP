@@ -1,18 +1,22 @@
 ﻿@model List<Movie>
 
 <div class="row">
+    <a class="btn btn-primary" asp-controller="Movie" asp-action="Create">Ajouter un film</a>
     @foreach (var item in Model)
     {
-        <div class="col-md-4 col-sm-12 mb-4">
-            <div class="card h-100">
-                <img src="@item.PosterUrl" class="card-img-top" alt="Movie Poster">
-                <div class="card-body">
-                    <h5 class="card-title text-center">@Html.DisplayFor(m => item.Title)</h5>
-                    <p class="card-text">@Html.DisplayFor(m => item.ReleaseDate)</p>
-                    <p class="card-text text-justify">@Html.DisplayFor(m => item.Description)</p>
-                    <p class="card-text">Genre: @Html.DisplayFor(m => item.Genre)</p>
+            <div class="col-md-4 col-sm-12 mb-4">
+                <div class="card h-100">
+                    <img src="@item.PosterUrl" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@Html.DisplayFor(m => item.Title)</h5>
+                        <p class="card-text">@Html.DisplayFor(m => item.ReleaseDate)</p>
+                        <p class="card-text text-justify">@Html.DisplayFor(m => item.Description)</p>
+                        <p class="card-text">Genre: @Html.DisplayFor(m => item.Genre)</p>
+                    </div>
+                    <a asp-controller="Movie" asp-action="Details" asp-route-id="@item.Id">Show Details</a>
+
                 </div>
             </div>
-        </div>
+        
     }
 </div>
