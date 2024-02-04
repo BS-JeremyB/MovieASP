@@ -1,0 +1,16 @@
+﻿@{
+    List<string> toDoList = new List<string>();
+
+    toDoList.Add("Voir les vues");
+    toDoList.Add("Voir les modèles");
+    toDoList.Add("Voir les sessions");
+
+}
+
+<ul>
+
+    @foreach(string item in toDoList)
+    {
+        <li>@item</li>
+    }
+</ul>
