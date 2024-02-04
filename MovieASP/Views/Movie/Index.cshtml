@@ -1,16 +1,18 @@
-﻿@{
-    List<string> toDoList = new List<string>();
+﻿@model List<Movie>
 
-    toDoList.Add("Voir les vues");
-    toDoList.Add("Voir les modèles");
-    toDoList.Add("Voir les sessions");
-
-}
-
-<ul>
-
-    @foreach(string item in toDoList)
+<div class="row">
+    @foreach (var item in Model)
     {
-        <li>@item</li>
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card h-100">
+                <img src="@item.PosterUrl" class="card-img-top" alt="Movie Poster">
+                <div class="card-body">
+                    <h5 class="card-title text-center">@Html.DisplayFor(m => item.Title)</h5>
+                    <p class="card-text">@Html.DisplayFor(m => item.ReleaseDate)</p>
+                    <p class="card-text text-justify">@Html.DisplayFor(m => item.Description)</p>
+                    <p class="card-text">Genre: @Html.DisplayFor(m => item.Genre)</p>
+                </div>
+            </div>
+        </div>
     }
-</ul>
+</div>
