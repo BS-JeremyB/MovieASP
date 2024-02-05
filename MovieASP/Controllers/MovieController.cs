@@ -5,16 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MovieASP.DAL.Repositories;
 using MovieASP.Data;
 using MovieASP.Models;
+using MovieASP.Models.Mappers;
 
 namespace MovieASP.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly MovieData _data;
+        private readonly IMovieRepository _data;
 
-        public MovieController(MovieData data)
+        public MovieController(IMovieRepository data)
         {
             _data = data;
         }
@@ -22,13 +24,13 @@ namespace MovieASP.Controllers
         
         public IActionResult Index()
         {
-            return View(_data.GetMovies());
+            return View(_data.GetAllMovies().Map());
         }
 
      
         public IActionResult Details(int id)
         {
-            Movie movie = _data.GetMovieById(id);
+            Movie movie = _data.GetMovieById(id).Map();
 
             return View(movie);
         }
@@ -46,7 +48,7 @@ namespace MovieASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                _data.AddMovie(movie);
+                _data.AddMovie(movie.Map());
                 return RedirectToAction("Index");
             }
             return View(movie);
@@ -55,7 +57,7 @@ namespace MovieASP.Controllers
    
         public IActionResult Edit(int id)
         {
-            Movie movie = _data.GetMovieById(id);
+            Movie movie = _data.GetMovieById(id).Map();
 
             return View(movie);
         }
@@ -68,7 +70,7 @@ namespace MovieASP.Controllers
 
             if (ModelState.IsValid)
             {
-                 _data.UpdateMovie(movie);
+                 _data.UpdateMovie(movie.Map());
                
                 return RedirectToAction("Index");
             }
@@ -78,7 +80,7 @@ namespace MovieASP.Controllers
 
         public IActionResult Delete(int id)
         {
-            Movie movie = _data.GetMovieById(id);
+            Movie movie = _data.GetMovieById(id).Map();
 
             return View(movie);
         }

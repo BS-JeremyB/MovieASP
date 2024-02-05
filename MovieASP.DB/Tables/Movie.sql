@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[Movie]
+(
+
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[PosterUrl] NVARCHAR(100) NOT NULL,
+	[Title] NVARCHAR(100) NOT NULL,
+	[Description] NVARCHAR(MAX) NOT NULL,
+	[Genre] NVARCHAR(100) NOT NULL,
+	[ReleaseDate] DATETIME NOT NULL
+
+)
+

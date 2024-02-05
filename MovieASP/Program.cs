@@ -1,10 +1,17 @@
+using Microsoft.Data.SqlClient;
+using MovieASP.DAL.Repositories;
+using MovieASP.DAL.Services;
 using MovieASP.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<MovieData>();
+builder.Services.AddScoped<IMovieRepository, MovieService>();
+builder.Services.AddTransient<SqlConnection>(c => new SqlConnection(builder.Configuration.GetConnectionString("default")));
+//builder.Services.AddSingleton<MovieData>();
+
+
 
 var app = builder.Build();
 
